@@ -1,4 +1,5 @@
 FROM --platform=linux/amd64 python:3.11-alpine3.17 as builder
+LABEL source_repository="https://github.com/Kuckkuck/curator-opensearch"
 
 # Add the community repo for access to patchelf binary package
 RUN echo 'https://dl-cdn.alpinelinux.org/alpine/v3.16/community/' >> /etc/apk/repositories
@@ -13,6 +14,7 @@ RUN pip3 install -r requirements.txt
 RUN python3 setup.py build_exe
 
 FROM --platform=linux/amd64 alpine:3.17
+LABEL source_repository="https://github.com/Kuckkuck/curator-opensearch"
 RUN apk --no-cache upgrade && apk --no-cache add openssl-dev expat
 COPY --from=builder build/exe.linux-x86_64-3.11 /curator/
 RUN mkdir /.curator
