@@ -22,16 +22,17 @@ def get_version():
     return VERSION
 
 def get_install_requires():
+    # These are included in 'requirements.txt'
     res = ['opensearch-py>=1.0.0' ]
-    res.append('urllib3>=1.26.5,<2')
-    res.append('requests>=2.26.0')
     res.append('boto3>=1.18.18')
-    res.append('requests_aws4auth>=1.1.1')
+    res.append('certifi>=2021.5.30')
     res.append('click>=8.0.0')
     res.append('pyyaml>=5.4.1')
-    res.append('voluptuous>=0.12.1')
-    res.append('certifi>=2021.5.30')
+    res.append('requests_aws4auth>=1.1.1')
+    res.append('requests>=2.26.0')
     res.append('six>=1.16.0')
+    res.append('urllib3>=1.26.5,<2')
+    res.append('voluptuous>=0.12.1')
     return res
 
 try:
