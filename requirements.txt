@@ -9,3 +9,4 @@ six>=1.16.0
 urllib3>=1.26.20,<2
 voluptuous>=0.15.2
 setuptools>=78.0.1
+charset-normalizer==2.1.0
