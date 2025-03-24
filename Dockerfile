@@ -1,9 +1,8 @@
-FROM --platform=linux/amd64 python:3.11-alpine3.21 AS builder
+FROM --platform=linux/amd64 python:3.11-slim AS builder
 LABEL source_repository="https://github.com/sapcc/curator-opensearch"
 
 # Add the community repo for access to patchelf binary package
-RUN echo 'https://dl-cdn.alpinelinux.org/alpine/v3.21/community/' >> /etc/apk/repositories
-RUN apk --no-cache upgrade && apk --no-cache add build-base tar musl-utils openssl-dev patchelf
+RUN apt-get update && apt-get install -y build-essential
 # patchelf-wrapper is necessary now for cx_Freeze, but not for Curator itself.
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
