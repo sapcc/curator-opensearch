@@ -13,13 +13,17 @@ RUN ln -s /lib/libc.musl-x86_64.so.1 ldd
 RUN ln -s /lib /lib64
 RUN python3 setup.py build_exe
 
-FROM --platform=linux/amd64 alpine:3.21
+FROM --platform=linux/amd64 debian:12-slim
 LABEL source_repository="https://github.com/sapcc/curator-opensearch"
-RUN apk --no-cache upgrade && apk --no-cache add openssl-dev expat bash vim
+RUN apt-get update
 COPY --from=builder build/exe.linux-x86_64-3.11 /curator/
 RUN mkdir /.curator
 
 #USER nobody:nobody
 ENV LD_LIBRARY_PATH /curator/lib:$LD_LIBRARY_PATH
+RUN ls -lah curator
+
+RUN ls -lah /curator/curator
+
 ENTRYPOINT ["/curator/curator"]
 
